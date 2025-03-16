@@ -1,0 +1,17 @@
+.customers-say {
+    padding: 32px;
+    text-align: center;
+}
+
+.testimonials {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+}
+
+.testimonial {
+    background-color: #f8f8f8;
+    padding: 16px;
+    border-radius: 8px;
+    width: 45%;
+  }

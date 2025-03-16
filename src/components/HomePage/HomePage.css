@@ -1,12 +1,12 @@
-.main {
+.homepage {
     padding: 32px;
     text-align: center;
 }
 
-.main h1 {
+.homepage h1 {
     color: #495e57;
 }
 
-.main p {
+.homepage p {
     color: #333;
 }
