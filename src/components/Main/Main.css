@@ -1,0 +1,12 @@
+.main {
+    padding: 32px;
+    text-align: center;
+}
+
+.main h1 {
+    color: #495e57;
+}
+
+.main p {
+    color: #333;
+}
