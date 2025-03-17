@@ -1,14 +1,18 @@
 import React , {useState} from "react";
 import './BookingForm.css';
 
-export default function BookingForm() {
+export default function BookingForm({ availableTimes, onDateChange }) {
 
     const [date, setDate] = useState('');
     const [time, setTime] = useState('17:00');
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState('Birthday');
 
-    const availableTimes = ['17:00', '18:00', '19:00', '20:00', '21:00'];
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        setDate(selectedDate);
+        onDateChange(selectedDate);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,24 +26,27 @@ export default function BookingForm() {
                 type="date"
                 id="res-date"
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={handleDateChange}
                 required
             />
 
             <label htmlFor="res-time">Choose time</label>
-            <select
-                type="time"
-                id="res-time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                required
-            >
-                {availableTimes.map((timeOption) => (
-                    <option key={timeOption} value={timeOption}>
-                        {timeOption}
-                    </option>
-                ))}
-            </select>
+      <select
+        id="res-time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+        required
+      >
+        {availableTimes.length > 0 ? (
+          availableTimes.map((timeOption) => (
+            <option key={timeOption} value={timeOption}>
+              {timeOption}
+            </option>
+          ))
+        ) : (
+          <option>No available times</option>
+        )}
+      </select>
 
             <label htmlFor="guests">Number of guests</label>
             <input

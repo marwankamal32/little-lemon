@@ -1,23 +1,48 @@
-import React, { useReducer } from "react";
+import React, { useReducer , useEffect} from "react";
 import BookingForm from '../BookingForm/BookingForm';
 import './BookingPage.css';
+
+
+const fetchAPI = window.fetchAPI;
+
+const fetchAvailableTimes = async(date) => {
+    try {
+        const response = await fetchAPI(date);
+        return response;
+    } catch (error) {
+        console.error("Error fetching available times:", error);
+        return [];
+    };
+};
 
 export const timesReducer = (state, action) => {
     switch (action.type) {
         case 'UPDATE_TIMES':
-            return ['17:00', '18:00', '19:00', '20:00', '21:00'];
+            return action.times;
         default:
             return state;
     }
 };
 
-export const initializeTimes = () => ['17:00', '18:00', '19:00', '20:00', '21:00'];
-
 export default function BookingPage() {
-    const [availableTimes, dispatch] = useReducer(timesReducer, initializeTimes());
+    const today = new Date().toISOString().split("T")[0];
 
-    const updateTimes = (selectedDate) => {
-        dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
+    const initializeTimes = async ()=> {
+        const times = await fetchAvailableTimes(today);
+        return times;
+    };
+
+    const [availableTimes, dispatch] = useReducer(timesReducer, [], () => []);
+
+    useEffect(() => {
+        initializeTimes().then((times) =>
+          dispatch({ type: "UPDATE_TIMES", times })
+        );
+    }, []);
+
+    const updateTimes = async (selectedDate) => {
+        const times = await fetchAvailableTimes(selectedDate);
+        dispatch({ type: 'UPDATE_TIMES', times});
     };
 
     return (
