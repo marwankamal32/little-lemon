@@ -8,7 +8,7 @@ export default function BookingForm() {
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState('Birthday');
 
-    const availableTime = ['17:00', '18:00', '19:00', '20:00', '21:00'];
+    const availableTimes = ['17:00', '18:00', '19:00', '20:00', '21:00'];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ export default function BookingForm() {
                 onChange={(e) => setTime(e.target.value)}
                 required
             >
-                {availableTime.map((timeOption) => (
+                {availableTimes.map((timeOption) => (
                     <option key={timeOption} value={timeOption}>
                         {timeOption}
                     </option>
