@@ -1,20 +1,20 @@
-import React, { use, useReducer } from "react";
+import React, { useReducer } from "react";
 import BookingForm from '../BookingForm/BookingForm';
 import './BookingPage.css';
 
-const timesReducer = (state, action) => {
+export const timesReducer = (state, action) => {
     switch (action.type) {
-        case 'UPDATE_TIMES' :
+        case 'UPDATE_TIMES':
             return ['17:00', '18:00', '19:00', '20:00', '21:00'];
         default:
             return state;
     }
 };
 
-const initializeTimes = () => ['17:00', '18:00', '19:00', '20:00', '21:00'];
+export const initializeTimes = () => ['17:00', '18:00', '19:00', '20:00', '21:00'];
 
 export default function BookingPage() {
-    const [availableTimes, dispatch] = useReducer(timesReducer, [] , initializeTimes);
+    const [availableTimes, dispatch] = useReducer(timesReducer, initializeTimes());
 
     const updateTimes = (selectedDate) => {
         dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
@@ -26,6 +26,5 @@ export default function BookingPage() {
             <p>Book your table at Little Lemon!</p>
             <BookingForm availableTimes={availableTimes} onDateChange={updateTimes}/>
         </div>
-
     );
-};
+}
