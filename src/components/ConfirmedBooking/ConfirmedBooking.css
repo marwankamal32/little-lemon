@@ -1,0 +1,12 @@
+.confirmed-booking {
+    text-align: center;
+    padding: 32px;
+}
+
+.confirmed-booking h1 {
+    color: #495e57;
+}
+
+.confirmed-booking p {
+    color: #333;
+}

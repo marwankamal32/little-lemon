@@ -1,33 +1,54 @@
 .booking-form {
-    display: grid;
-    max-width: 300px;
-    gap: 20px;
+    max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    background-color: #fff;
     border-radius: 8px;
-  }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+  /* Form labels */
 .booking-form label {
+    display: block;
+    margin-bottom: 10px;
     font-weight: bold;
-  }
+    color: #495e57; /* Dark green for labels */
+}
 
+  /* Form inputs */
 .booking-form input,
 .booking-form select {
+    width: 100%;
     padding: 8px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
+    font-size: 14px;
+    color: #495e57; /* Dark green for text */
+}
 
+  /* Focus state for inputs */
+.booking-form input:focus,
+.booking-form select:focus {
+    border-color: #f4ce14; /* Yellow border on focus */
+    outline: none;
+}
+
+  /* Submit button */
 .booking-form button {
+    width: 100%;
     padding: 10px;
-    background-color: #495e57;
-    color: #fff;
+    background-color: #f4ce14; /* Yellow background */
     border: none;
     border-radius: 4px;
+    color: #495e57; /* Dark green text */
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-  }
+    transition: background-color 0.3s ease;
+}
 
+  /* Hover effect for button */
 .booking-form button:hover {
-    background-color: #f4ce14;
-  }
+    background-color: #e0b800;
+}
