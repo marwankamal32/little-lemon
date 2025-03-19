@@ -1,6 +1,5 @@
-// BookingForm.js
-import React, { useState } from "react";
-import "./BookingForm.css"; // Import the CSS file
+import React, { useState, useEffect } from "react";
+import "./BookingForm.css";
 
 const BookingForm = ({ submitForm }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +11,8 @@ const BookingForm = ({ submitForm }) => {
     occasion: "",
   });
 
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -19,12 +20,31 @@ const BookingForm = ({ submitForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitForm(formData); // Call the submitForm function passed via props
+    if (validateForm()) {
+      submitForm(formData); // Call the submitForm function passed via props
+    }
   };
+
+  const validateForm = () => {
+    const { name, email, date, time, guests, occasion } = formData;
+    return (
+      name.trim() !== "" &&
+      email.includes("@") &&
+      date !== "" &&
+      time !== "" &&
+      guests >= 1 &&
+      guests <= 10 &&
+      occasion !== ""
+    );
+  };
+
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [formData]);
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
-      <h2>Book a Table</h2>
+        <h2>Book a Table</h2>
       <label>
         Name:
         <input
@@ -90,7 +110,9 @@ const BookingForm = ({ submitForm }) => {
           <option value="Anniversary">Anniversary</option>
         </select>
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={!isFormValid}>
+        Submit
+      </button>
     </form>
   );
 };
